@@ -13,8 +13,8 @@ public class CustomExceptionHandler {
             e.printStackTrace();
 
             ErrorMessage message = new ErrorMessage();
-            message.setMessage("too short letter"); //how to make diverse error message in CustomException?
-            message.setCode(999);
+            message.setMessage(e.getMessage()); //how to make diverse error message in CustomException?
+            message.setCode(e.getCode());
             return message;
     }
 }

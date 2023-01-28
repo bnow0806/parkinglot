@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 //@AllArgsConstructor
 @Data
-public class UserResponseDto {
+public class UserResponseDto {      //UserDto
 
     private Long number;
 

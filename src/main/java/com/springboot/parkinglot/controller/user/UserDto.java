@@ -1,4 +1,5 @@
 package com.springboot.parkinglot.controller.user;
+import com.springboot.parkinglot.controller.CheckValidity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import javax.persistence.Column;
 @NoArgsConstructor
 //@AllArgsConstructor
 @Data
-public class UserDto {
+public class UserDto implements CheckValidity {     //UserRequest
 
     private String id;
 
@@ -21,4 +22,7 @@ public class UserDto {
         this.password = password;
         this.name = name;
     }
+
+
+
 }

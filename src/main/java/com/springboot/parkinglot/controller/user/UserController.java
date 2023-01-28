@@ -40,7 +40,8 @@ public class UserController implements CheckValidity {
         //new checkValidity methode
         check(userDto.getId(),userDto.getPassword(),userDto.getName());   //if name is shorter than 6, CustomException arises
 
-        UserResponseDto userResponseDto = userService.saveUser(userDto);
+        userResponseDto = userDto
+        userService.saveUser(userResponseDto);  //똑같은 값이면 dto 아니여도 됨. service->controller : entity xxx / dto
 
         return ResponseEntity.status(HttpStatus.OK).body(userResponseDto);
     }
@@ -107,7 +108,7 @@ public class UserController implements CheckValidity {
     @Override   //how to make diverse input and same name?
     public void check(String id, String password, String name) throws CustomException{
         if(id.length() <6){
-            throw new CustomException();
+            throw new CustomException(404, -1, "sdssd");
         }
 
         if(password.length() <6){

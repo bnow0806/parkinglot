@@ -1,11 +1,15 @@
 package com.springboot.parkinglot.common;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @NoArgsConstructor
-public class CustomException extends Exception{
+@AllArgsConstructor
+public class CustomException extends RuntimeException{
 
-    CustomException(String message){
-        super(message);
-    }
+
+
+
 }

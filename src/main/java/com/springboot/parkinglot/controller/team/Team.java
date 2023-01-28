@@ -1,4 +1,4 @@
-package com.springboot.parkinglot.controller.user;
+package com.springboot.parkinglot.controller.team;
 
 
 import com.springboot.parkinglot.controller.user.User;
