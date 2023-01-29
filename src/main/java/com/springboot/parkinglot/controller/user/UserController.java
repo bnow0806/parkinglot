@@ -1,15 +1,10 @@
 package com.springboot.parkinglot.controller.user;
 
-import com.springboot.parkinglot.common.CustomException;
-import com.springboot.parkinglot.controller.CheckValidity;
+import com.springboot.parkinglot.common.ParkingLotException;
 import com.springboot.parkinglot.service.user.UserService;
-import lombok.Data;
-import org.hibernate.annotations.Check;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
@@ -17,7 +12,7 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/user")
-public class UserController implements CheckValidity {
+public class UserController{
 
     private  final UserService userService;
 
@@ -29,44 +24,44 @@ public class UserController implements CheckValidity {
     }
 
     @PostMapping()
-    public ResponseEntity<UserResponseDto> createUserRequest(@RequestBody UserDto userDto)
-    throws CustomException{
+    public ResponseEntity<UserDto> createUserRequest(@RequestBody UserRequest userRequest)
+    throws ParkingLotException{
 
         //checkValidity
-//        checkString(userDto.getId());
-//        checkString(userDto.getPassword());
-//        checkString(userDto.getName());
+        //System.out.println("length : "+ userDto.getId().length());
+        userRequest.check();
 
-        //new checkValidity methode
-        check(userDto.getId(),userDto.getPassword(),userDto.getName());   //if name is shorter than 6, CustomException arises
+        UserDto userDto = userService.saveUser(userRequest);
 
+<<<<<<< HEAD
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
+=======
         userResponseDto = userDto
         userService.saveUser(userResponseDto);  //똑같은 값이면 dto 아니여도 됨. service->controller : entity xxx / dto
 
         return ResponseEntity.status(HttpStatus.OK).body(userResponseDto);
+>>>>>>> develop
     }
 
     @GetMapping()
-    public  ResponseEntity<UserResponseDto> getUserRequest(Long number){
-        UserResponseDto userResponseDto = userService.getUser(number);
+    public  ResponseEntity<UserDto> getUserRequest(Long number){
+        UserDto userDto = userService.getUser(number);
 
-        return ResponseEntity.status(HttpStatus.OK).body(userResponseDto);
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
     @PutMapping()
-    public ResponseEntity<UserResponseDto> changeUser
-            (@RequestBody ChangeUserNameDto changeUserNameDto) throws Exception {
+    public ResponseEntity<UserDto> changeUser
+            (@RequestBody ChangeUserNameRequest changeUserNameRequest) throws Exception {
 
         //checkValidity
-        checkString(changeUserNameDto.getId());
-        checkString(changeUserNameDto.getPassword());
-        checkLong(changeUserNameDto.getNumber());
-
-        UserResponseDto userResponseDto = userService.chageUserName(
-                changeUserNameDto.getNumber(), changeUserNameDto.getId(),
-                changeUserNameDto.getPassword()
+        
+        UserDto userDto = userService.chageUserName(
+                changeUserNameRequest.getNumber(),
+                changeUserNameRequest.getId(),
+                changeUserNameRequest.getPassword()
         );
-        return ResponseEntity.status(HttpStatus.OK).body(userResponseDto);
+        return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
     @DeleteMapping()
@@ -75,6 +70,9 @@ public class UserController implements CheckValidity {
 
         return  ResponseEntity.status(HttpStatus.OK).body("삭제 완료");
     }
+<<<<<<< HEAD
+    
+=======
 
 
     @Override
@@ -119,4 +117,5 @@ public class UserController implements CheckValidity {
             throw new CustomException();
         }
     }
+>>>>>>> develop
 }
