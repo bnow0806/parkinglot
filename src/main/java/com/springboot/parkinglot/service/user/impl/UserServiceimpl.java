@@ -1,13 +1,12 @@
 package com.springboot.parkinglot.service.user.impl;
 
-import com.springboot.parkinglot.controller.team.Team;
 import com.springboot.parkinglot.controller.user.User;
-import com.springboot.parkinglot.controller.user.UserRequest;
 import com.springboot.parkinglot.controller.user.UserDto;
-import com.springboot.parkinglot.repository.team.TeamRepository;
+import com.springboot.parkinglot.controller.user.UserResponseDto;
 import com.springboot.parkinglot.repository.user.*;
 import com.springboot.parkinglot.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,57 +14,48 @@ import java.util.Optional;
 @Service
 public class UserServiceimpl implements UserService {
 
-
-    private final UserRepository userRepository;
-    private final TeamRepository teamRepository;
+    private  final UserDao userDao;
+    private final UserRepository userRepository;    //made for deleting dao file
 
     @Autowired
-    public UserServiceimpl(UserRepository userRepository, TeamRepository teamRepository)
-    {
+    public UserServiceimpl(UserDao userDao, UserRepository userRepository)
+    {   this.userDao = userDao;
         this.userRepository = userRepository;
-        this.teamRepository = teamRepository;
     }
 
     @Override
-    public UserDto saveUser(UserRequest userRequest){
+    public UserResponseDto saveUser(UserDto userDto){
         User user = new User();
-        user.setId(userRequest.getId());
-        user.setPassword(userRequest.getPassword());
-        user.setName(userRequest.getName());
+        user.setId(userDto.getId());
+        user.setPassword(userDto.getPassword());
+        user.setName(userDto.getName());
 
-        //matching Team
-//        Team team = new Team();
-//        team.setName("3팀");
-//        teamRepository.save(team);
-//
-//        user.setTeam(team);
+        User savedUser = userDao.insertUser(user);
 
-        User savedUser = userRepository.save(user);
+        UserResponseDto userResponseDto = new UserResponseDto();
+        userResponseDto.setNumber(savedUser.getNumber());
+        userResponseDto.setId(savedUser.getId());
+        userResponseDto.setPassword(savedUser.getPassword());
+        userResponseDto.setName(savedUser.getName());
 
-        UserDto userDto = new UserDto();
-        userDto.setNumber(savedUser.getNumber());
-        userDto.setId(savedUser.getId());
-        userDto.setPassword(savedUser.getPassword());
-        userDto.setName(savedUser.getName());
-
-        return userDto;
+        return userResponseDto;
     }
 
     @Override
-    public UserDto getUser(Long number) {
-        User user = userRepository.getById(number);
+    public UserResponseDto getUser(Long number) {
+        User user = userDao.selectUser(number);
 
-        UserDto userDto = new UserDto();
-        userDto.setNumber(user.getNumber());
-        userDto.setId(user.getId());
-        userDto.setPassword(user.getPassword());
-        userDto.setName(user.getName());
+        UserResponseDto userResponseDto = new UserResponseDto();
+        userResponseDto.setNumber(user.getNumber());
+        userResponseDto.setId(user.getId());
+        userResponseDto.setPassword(user.getPassword());
+        userResponseDto.setName(user.getName());
 
-        return userDto;
+        return userResponseDto;
     }
 
     @Override
-    public UserDto chageUserName(Long number, String id, String password) throws Exception {
+    public UserResponseDto chageUserName(Long number, String id, String password) throws Exception {
 
         Optional<User> selectedUser = userRepository.findById(number);
         User updatedUser;
@@ -83,13 +73,13 @@ public class UserServiceimpl implements UserService {
         }
 
         //Dao - updatedUser //service - UserResponseDto
-        UserDto userDto = new UserDto();
-        userDto.setNumber(updatedUser.getNumber());
-        userDto.setId(updatedUser.getId());
-        userDto.setPassword(updatedUser.getPassword());
-        userDto.setName(updatedUser.getName());
+        UserResponseDto userResponseDto = new UserResponseDto();
+        userResponseDto.setNumber(updatedUser.getNumber());
+        userResponseDto.setId(updatedUser.getId());
+        userResponseDto.setPassword(updatedUser.getPassword());
+        userResponseDto.setName(updatedUser.getName());
 
-        return userDto;
+        return userResponseDto;
     }
 
     @Override
