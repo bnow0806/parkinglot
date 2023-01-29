@@ -1,15 +1,17 @@
 package com.springboot.parkinglot.service.user;
 
-import com.springboot.parkinglot.controller.user.UserRequest;
+import com.springboot.parkinglot.controller.user.User;
 import com.springboot.parkinglot.controller.user.UserDto;
+import com.springboot.parkinglot.controller.user.UserResponseDto;
+import org.springframework.data.jpa.repository.Query;
 
 public interface UserService {
 
-    UserDto saveUser(UserRequest userRequest);
+    UserResponseDto saveUser(UserDto userDto);
 
-    UserDto getUser(Long number);
+    UserResponseDto getUser(Long number);
 
-    UserDto chageUserName(Long number, String id, String password) throws Exception;
+    UserResponseDto chageUserName(Long number, String id, String password) throws Exception;
 
     void deleteUser(Long number) throws Exception;
 }
