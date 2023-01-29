@@ -33,7 +33,14 @@ public class UserController{
 
         UserDto userDto = userService.saveUser(userRequest);
 
+<<<<<<< HEAD
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
+=======
+        userResponseDto = userDto
+        userService.saveUser(userResponseDto);  //똑같은 값이면 dto 아니여도 됨. service->controller : entity xxx / dto
+
+        return ResponseEntity.status(HttpStatus.OK).body(userResponseDto);
+>>>>>>> develop
     }
 
     @GetMapping()
@@ -63,5 +70,52 @@ public class UserController{
 
         return  ResponseEntity.status(HttpStatus.OK).body("삭제 완료");
     }
+<<<<<<< HEAD
     
+=======
+
+
+    @Override
+    public void checkString(String value) {
+
+        if(value==null){
+            logger.info("null");
+        }
+        if(value!=null && value.length()>20){
+            logger.info("size is more than 20");
+        }
+        if(value.isBlank()){
+            logger.info("isBlank");
+        }
+
+    }
+
+    @Override
+    public void checkLong(Long value) {
+        if(value==null){
+            logger.info("null");
+        }
+        if(value!=null && Long.toString(value).length()>20){
+            logger.info("size is more than 20");
+        }
+        if(Long.toString(value).isBlank()){
+            logger.info("isBlank");
+        }
+    }
+
+    @Override   //how to make diverse input and same name?
+    public void check(String id, String password, String name) throws CustomException{
+        if(id.length() <6){
+            throw new CustomException(404, -1, "sdssd");
+        }
+
+        if(password.length() <6){
+            throw new CustomException();
+        }
+
+        if(name.length() <6){
+            throw new CustomException();
+        }
+    }
+>>>>>>> develop
 }
