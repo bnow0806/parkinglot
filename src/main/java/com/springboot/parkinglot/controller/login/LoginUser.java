@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity //added because of "Not a managed type:"
 @Getter
 @NoArgsConstructor
+@Table(name="login_user")
 public class LoginUser {
 
     @Id
