@@ -1,5 +1,8 @@
 package com.springboot.parkinglot.controller.charger;
 
+import lombok.Data;
+
+@Data
 public class ChargerCreateRequest {
     private Long number;
 

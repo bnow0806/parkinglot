@@ -24,7 +24,7 @@ public class ChargerController {
     }
 
     //Charger 생성
-    @PostMapping()
+    @PostMapping("/admin")
     public ResponseEntity<ChargerDto> createCharger(ChargerCreateRequest chargerCreateRequest){
 
         ChargerDto chargerDto = chargerService.saveCharger(chargerCreateRequest);
@@ -34,14 +34,14 @@ public class ChargerController {
 
     //Charger 조회
     @GetMapping()
-    public  ResponseEntity<List<ChargerDto>> getCharger(){
-        List<ChargerDto> listChargerDto = chargerService.getCharger();  //get all
+    public  ResponseEntity<ChargerDto> getCharger(Long number){
+        ChargerDto chargerDto = chargerService.getCharger(number);
 
-        return ResponseEntity.status(HttpStatus.OK).body(listChargerDto);
+        return ResponseEntity.status(HttpStatus.OK).body(chargerDto);
     }
 
     //Charger 수정
-    @PutMapping()
+    @PutMapping("/admin")
     public ResponseEntity<ChargerDto> changeCharger
             (@RequestBody ChargerUpdateRequest chargerUpdateRequest){
 
@@ -51,7 +51,7 @@ public class ChargerController {
     }
 
     //Charger 삭제
-    @DeleteMapping()
+    @DeleteMapping("/admin")
     public  ResponseEntity<String> deleteCharger(Long number){
         chargerService.deleteCharger(number);
 

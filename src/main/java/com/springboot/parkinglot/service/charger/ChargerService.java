@@ -13,7 +13,7 @@ public interface ChargerService {
 
     ChargerDto saveCharger(ChargerCreateRequest chargerCreateRequest);
 
-    List<ChargerDto> getCharger();
+    ChargerDto getCharger(Long number);
 
     ChargerDto chageCharger(ChargerUpdateRequest chargerUpdateRequest);
 

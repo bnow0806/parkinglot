@@ -56,6 +56,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/api/v1/login/admin").hasRole("ADMIN") // 각 url에 접근 가능한지
                 .antMatchers("/api/v1/login/manager").hasRole("MANAGER") // 확인하기 위해 설정 //TODO : Test 필요
+                .antMatchers("/api/v1/alluserdata").hasRole("ADMIN")
+                .antMatchers("/api/v1/myuserdata").hasRole("MANAGER")
+                .antMatchers("/charger/admin").hasRole("ADMIN")
                 .and()
                 .httpBasic(); // 기본 로그인 창 제공
 

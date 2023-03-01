@@ -1,7 +1,9 @@
 package com.springboot.parkinglot.controller.charger;
 
 import com.springboot.parkinglot.controller.team.Team;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name="charger")
+@NoArgsConstructor
 public class Charger {  //data 묶을수 없을까?
 
     @Id
@@ -52,4 +55,20 @@ public class Charger {  //data 묶을수 없을까?
     //private String adapterType; //enum 같이?
 
     //private String chargeFee;
+
+    @Builder
+    public Charger(Long number, String location, String name, String paymentDetail, int freeOfCharge, String voltage, String installType, String chargeType, String isUsable, String cpo, String absLocation, String paymentType) {
+        this.number = number;
+        this.location = location;
+        this.name = name;
+        this.paymentDetail = paymentDetail;
+        this.freeOfCharge = freeOfCharge;
+        this.voltage = voltage;
+        this.installType = installType;
+        this.chargeType = chargeType;
+        this.isUsable = isUsable;
+        this.cpo = cpo;
+        this.absLocation = absLocation;
+        this.paymentType = paymentType;
+    }
 }
