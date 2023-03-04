@@ -4,17 +4,14 @@ import com.springboot.parkinglot.controller.charger.Charger;
 import com.springboot.parkinglot.controller.charger.ChargerCreateRequest;
 import com.springboot.parkinglot.controller.charger.ChargerDto;
 import com.springboot.parkinglot.controller.charger.ChargerUpdateRequest;
-import com.springboot.parkinglot.controller.user.User;
-import com.springboot.parkinglot.controller.user.UserDto;
 import com.springboot.parkinglot.repository.charger.ChargerRepository;
-import com.springboot.parkinglot.repository.team.TeamRepository;
-import com.springboot.parkinglot.repository.user.UserRepository;
 import com.springboot.parkinglot.service.charger.ChargerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ChargerServiceimpl implements ChargerService { //TODO : need to implement
 
     private final ChargerRepository chargerRepository;

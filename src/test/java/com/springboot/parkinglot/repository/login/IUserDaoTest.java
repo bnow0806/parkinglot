@@ -23,14 +23,14 @@ public class IUserDaoTest {
     @Test
     public void saveTestUser() {
 
-        String testEmail = "test@naver.com";
+        String testEmail = "admin@naver.com";
 
         // Role 작명규칙은 반드시 prefix로 ROLE_  을 명시해야 함!
         iUserDao.save(LoginUser.builder()
-                .username("test")
+                .username("admin")
                 .email(testEmail)
-                .password(passwordEncoder.encode("test"))
-                .role("ROLE_MANAGER")
+                .password(passwordEncoder.encode("admin"))
+                .role("ROLE_ADMIN")
                 .active("1")
                 .build());
 

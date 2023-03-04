@@ -5,10 +5,12 @@ import com.springboot.parkinglot.controller.login.LoginUserDto;
 import com.springboot.parkinglot.repository.login.IUserDao;
 import com.springboot.parkinglot.service.login.LoginUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class LoginUserServiceimpl implements LoginUserService {
 
     private final IUserDao iUserDao;
