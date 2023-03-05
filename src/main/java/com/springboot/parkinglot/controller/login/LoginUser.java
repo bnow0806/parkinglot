@@ -23,7 +23,7 @@ public class LoginUser {
     private String password;
 
     @Column(nullable = false)
-    private String email;  // user를 찾을 때 email을 이용하여 찾는다.
+    private String email;  // user를 찾을 때 email을 이용하여 찾는다. //why??
 
     @Column(nullable = false)
     private String active; // 1: active, 0: inactive

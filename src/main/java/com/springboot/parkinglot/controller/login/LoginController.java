@@ -9,10 +9,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -50,5 +56,20 @@ public class LoginController {
         LoginUserDto loginUserDto = loginUserService.getLoginUser(username);
 
         return ResponseEntity.status(HttpStatus.OK).body(loginUserDto);
+    }
+
+    @GetMapping("api/v1/logout")
+    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+        //new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+        //HttpSession session=request.getSession(false);
+        //session.invalidate();
+        Cookie[] cookies = request.getCookies();
+
+        for(Cookie cookie : cookies)
+        {
+            System.out.println("cookie" + cookie);
+        }
+
+        return "redirect:/";
     }
 }

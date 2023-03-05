@@ -66,6 +66,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/charger/admin").hasRole("ADMIN")
                 .and()
                 .httpBasic();
+                //logout
+                //.and()
+                //.logout()
+                //.logoutUrl("/doLogout")
+                //.logoutSuccessUrl("/") // 로그아웃 성공시 리다이렉트 주소
+                //.invalidateHttpSession(true); // 로그아웃 이후 세션 전체 삭제 여부
     }
 
     // Custom Security Config에서 사용할 password encoder를 BCryptPasswordEncoder로 정의
