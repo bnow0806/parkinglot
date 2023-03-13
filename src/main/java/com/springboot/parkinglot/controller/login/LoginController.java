@@ -57,19 +57,4 @@ public class LoginController {
 
         return ResponseEntity.status(HttpStatus.OK).body(loginUserDto);
     }
-
-    @GetMapping("api/v1/logout")
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        //new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
-        //HttpSession session=request.getSession(false);
-        //session.invalidate();
-        Cookie[] cookies = request.getCookies();
-
-        for(Cookie cookie : cookies)
-        {
-            System.out.println("cookie" + cookie);
-        }
-
-        return "redirect:/";
-    }
 }

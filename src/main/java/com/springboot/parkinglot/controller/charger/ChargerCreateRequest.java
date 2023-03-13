@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class ChargerCreateRequest {
-    private Long number;
+    //private Long number;
 
     private String location;
 

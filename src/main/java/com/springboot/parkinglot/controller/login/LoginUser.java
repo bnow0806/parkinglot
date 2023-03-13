@@ -1,5 +1,6 @@
 package com.springboot.parkinglot.controller.login;
 
+import com.springboot.parkinglot.controller.favorite.Favorite;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,10 @@ public class LoginUser {
 
     @Column(nullable = false)
     private String role;
+
+    @OneToOne
+    @JoinColumn(name = "favorite_id")
+    private Favorite favorite;
 
     @Builder
     public LoginUser(String username, String password, String email, String active, String role) {
