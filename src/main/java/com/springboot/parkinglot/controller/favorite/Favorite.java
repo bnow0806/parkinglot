@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Favorite {
     private LoginUser loginUser;
 
     //역방향
-    @OneToMany(mappedBy = "favorite")
+    @OneToMany(mappedBy = "favorite", fetch=FetchType.LAZY)    //lazy
     private List<FavoriteCharger> favoriteCharger;
 
     public Favorite() {             //생성자 강제로 만들기

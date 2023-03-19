@@ -30,7 +30,7 @@ public class FavoriteRepositoryTest {
 
         //Favorite - FavoriteCharger - Charger
         Favorite favoriteFirst = new Favorite();
-        //favoriteRepository.save(favoriteFirst);
+        favoriteRepository.save(favoriteFirst);
 
         Charger chargerFirst = Charger.builder()
                                 .location("(10,20)")
@@ -80,13 +80,12 @@ public class FavoriteRepositoryTest {
 
         favoriteFirst.getFavoriteCharger().add(favoriteChargerFirst);
         favoriteFirst.getFavoriteCharger().add(favoritChargerSecond);
-        favoriteRepository.save(favoriteFirst);
+        favoriteRepository.save(favoriteFirst);     //한번 더 저장
 
-        //trouble arises!
         Favorite savedFavorite = favoriteRepository.findById(favoriteFirst.getId()).get();
 
         //Test
-        System.out.println("savedFavorite " + savedFavorite);
+        System.out.println("savedFavorite " + savedFavorite);   //error occurs
 
         List<FavoriteCharger> savedFavoriteFavoriteCharger = savedFavorite.getFavoriteCharger();
         for(FavoriteCharger favoriteChargerTemp : savedFavoriteFavoriteCharger){
@@ -96,12 +95,7 @@ public class FavoriteRepositoryTest {
         }
 
 
-
-
-
-
     }
-
 }
 
 

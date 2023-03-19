@@ -11,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -54,6 +52,15 @@ public class LoginController {
     @GetMapping("/api/v1/myuserdata")   //get my user data
     public ResponseEntity<LoginUserDto> myUserData(String username){
         LoginUserDto loginUserDto = loginUserService.getLoginUser(username);
+
+        return ResponseEntity.status(HttpStatus.OK).body(loginUserDto);
+    }
+
+    @PostMapping("/signin")
+    public  ResponseEntity<LoginUserDto> signIn
+            (SignInRequest signInRequest){
+
+        LoginUserDto loginUserDto = loginUserService.signInLoginUser(signInRequest);
 
         return ResponseEntity.status(HttpStatus.OK).body(loginUserDto);
     }

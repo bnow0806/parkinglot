@@ -4,12 +4,14 @@ import com.springboot.parkinglot.controller.favorite.Favorite;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
 
 @Entity //added because of "Not a managed type:"
 @Getter
+@Setter
 @NoArgsConstructor
 @Table(name="login_user")
 public class LoginUser {

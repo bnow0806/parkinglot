@@ -34,8 +34,8 @@ public class IUserDaoTest {
                 .active("1")
                 .build());
 
+        // DB 저장 됬는지 확인
         LoginUser loginUser = iUserDao.findByEmail(testEmail).orElseThrow(() -> new UsernameNotFoundException("not find"));
-        // MANAGER 도 동일하게 생성하기
 
         assertThat(loginUser.getEmail()).isEqualTo(testEmail);
     }
