@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 //검색 & 등록 & 삭제 기능 구현 필요
 // 등록 -> 검색 -> 삭제순 구현
+// 현재 : 검색, 삭제 구현 필요
 @RestController
 @RequestMapping("/favorite")
 public class FavoriteController {
