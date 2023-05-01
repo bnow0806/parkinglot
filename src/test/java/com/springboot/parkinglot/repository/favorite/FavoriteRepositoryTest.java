@@ -26,7 +26,7 @@ public class FavoriteRepositoryTest {
     FavoriteChargerRepository favoriteChargerRepository;
 
     @Test
-    void parkinglotTest2() {
+    void parkinglotTest2() {    //test
 
         //Favorite - FavoriteCharger - Charger
         Favorite favoriteFirst = new Favorite();
