@@ -85,8 +85,9 @@ public class FavoriteRepositoryTest {
         Favorite savedFavorite = favoriteRepository.findById(favoriteFirst.getId()).get();
 
         //Test
-        System.out.println("savedFavorite " + savedFavorite);   //error occurs
+        //System.out.println("savedFavorite " + savedFavorite);   //error occurs
 
+        //savedFavorite 에서 FavoriteCharger 접근 (1:N)
         List<FavoriteCharger> savedFavoriteFavoriteCharger = savedFavorite.getFavoriteCharger();
         for(FavoriteCharger favoriteChargerTemp : savedFavoriteFavoriteCharger){
             System.out.println("favoriteChargerTemp " + favoriteChargerTemp);
