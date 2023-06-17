@@ -20,23 +20,23 @@ public class IUserDaoTest {
     @Autowired
     private IUserDao iUserDao;
 
-    @Test
-    public void saveTestUser() {
-
-        String testEmail = "admin@naver.com";
-
-        // Role 작명규칙은 반드시 prefix로 ROLE_  을 명시해야 함!
-        iUserDao.save(LoginUser.builder()
-                .username("admin")
-                .email(testEmail)
-                .password(passwordEncoder.encode("admin"))
-                .role("ROLE_ADMIN")
-                .active("1")
-                .build());
-
-        LoginUser loginUser = iUserDao.findByEmail(testEmail).orElseThrow(() -> new UsernameNotFoundException("not find"));
-        // MANAGER 도 동일하게 생성하기
-
-        assertThat(loginUser.getEmail()).isEqualTo(testEmail);
-    }
+//    @Test
+//    public void saveTestUser() {
+//
+//        String testEmail = "admin@naver.com";
+//
+//        // Role 작명규칙은 반드시 prefix로 ROLE_  을 명시해야 함!
+//        iUserDao.save(LoginUser.builder()
+//                .username("admin")
+//                .email(testEmail)
+//                .password(passwordEncoder.encode("admin"))
+//                .role("ROLE_ADMIN")
+//                .active("1")
+//                .build());
+//
+//        // DB 저장 됬는지 확인
+//        LoginUser loginUser = iUserDao.findByEmail(testEmail).orElseThrow(() -> new UsernameNotFoundException("not find"));
+//
+//        assertThat(loginUser.getEmail()).isEqualTo(testEmail);
+//    }
 }

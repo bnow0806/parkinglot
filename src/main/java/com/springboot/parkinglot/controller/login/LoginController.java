@@ -11,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -58,18 +56,12 @@ public class LoginController {
         return ResponseEntity.status(HttpStatus.OK).body(loginUserDto);
     }
 
-    @GetMapping("api/v1/logout")
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        //new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder.getContext().getAuthentication());
-        //HttpSession session=request.getSession(false);
-        //session.invalidate();
-        Cookie[] cookies = request.getCookies();
+    @PostMapping("/signin")
+    public  ResponseEntity<LoginUserDto> signIn
+            (SignInRequest signInRequest){
 
-        for(Cookie cookie : cookies)
-        {
-            System.out.println("cookie" + cookie);
-        }
+        LoginUserDto loginUserDto = loginUserService.signInLoginUser(signInRequest);
 
-        return "redirect:/";
+        return ResponseEntity.status(HttpStatus.OK).body(loginUserDto);
     }
 }

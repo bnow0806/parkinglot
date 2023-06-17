@@ -6,9 +6,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootTest
 class ParkinglotApplicationTests {
-
 	@Test
 	void contextLoads() {
 	}
-
 }

@@ -56,9 +56,10 @@ public class Charger {  //data 묶을수 없을까?
 
     //private String chargeFee;
 
+    //OneToMany //Mappedby
+
     @Builder
-    public Charger(Long number, String location, String name, String paymentDetail, int freeOfCharge, String voltage, String installType, String chargeType, String isUsable, String cpo, String absLocation, String paymentType) {
-        this.number = number;
+    public Charger(String location, String name, String paymentDetail, int freeOfCharge, String voltage, String installType, String chargeType, String isUsable, String cpo, String absLocation, String paymentType) {
         this.location = location;
         this.name = name;
         this.paymentDetail = paymentDetail;
