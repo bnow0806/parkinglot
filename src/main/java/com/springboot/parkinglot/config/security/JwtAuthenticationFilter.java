@@ -40,7 +40,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // Create login Token
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(
-                        credentials.getEmail(),    // email 이용
+                        credentials.getUserEmail(),    // email 이용
                         credentials.getPassword(),
                         new ArrayList<>()
                 );
