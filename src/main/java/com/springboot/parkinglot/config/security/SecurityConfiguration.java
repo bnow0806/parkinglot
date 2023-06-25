@@ -71,7 +71,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.iUserDao))
                 .authorizeRequests()
                 .antMatchers("/user").permitAll()
-                //.antMatchers(HttpMethod.POST, "login").permitAll()  //login test
+                .antMatchers(HttpMethod.POST, "login").hasRole("ADMIN")  //login test   //by UsernamePasswordAuthenticationFilter
                 .antMatchers("/api/v1/login/admin").hasRole("ADMIN")        // 각 url에 접근 가능한지
                 .antMatchers("/api/v1/login/manager").hasRole("MANAGER")    // 확인하기 위해 설정
                 .antMatchers("/api/v1/alluserdata").hasRole("ADMIN")
