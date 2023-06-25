@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
@@ -59,23 +60,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         //2023.03.05 jwt token config test
         http
+
+//                .formlogin()
+//                .loginProcessingUrl("/perform_login")
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), this.iUserDao))
                 .authorizeRequests()
                 .antMatchers("/user").permitAll()
-                .antMatchers(HttpMethod.POST, "login").permitAll()  //login test
+                //.antMatchers(HttpMethod.POST, "login").permitAll()  //login test
                 .antMatchers("/api/v1/login/admin").hasRole("ADMIN")        // 각 url에 접근 가능한지
                 .antMatchers("/api/v1/login/manager").hasRole("MANAGER")    // 확인하기 위해 설정
                 .antMatchers("/api/v1/alluserdata").hasRole("ADMIN")
                 .antMatchers("/api/v1/myuserdata").hasRole("MANAGER")
                 //.antMatchers("/charger/admin").hasRole("ADMIN");
-                .antMatchers("/charger/admin").permitAll(); //Test
-
-
-
+                .antMatchers("/charger/admin").permitAll();
     }
 
     // Custom Security Config에서 사용할 password encoder를 BCryptPasswordEncoder로 정의

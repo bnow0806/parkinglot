@@ -1,24 +1,11 @@
 package com.springboot.parkinglot.controller.login;
 
-import com.springboot.parkinglot.controller.user.UserDto;
-import com.springboot.parkinglot.repository.login.IUserDao;
 import com.springboot.parkinglot.service.login.LoginUserService;
-import com.springboot.parkinglot.service.login.UserPrincipalDetailsService;
-import com.springboot.parkinglot.service.user.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 public class LoginController {
@@ -63,5 +50,14 @@ public class LoginController {
         LoginUserDto loginUserDto = loginUserService.signInLoginUser(signInRequest);
 
         return ResponseEntity.status(HttpStatus.OK).body(loginUserDto);
+    }
+
+    @GetMapping("/api/v1/login/common")
+    public ResponseEntity<LoginResultDto> loginCommon
+            (LoginRequest loginRequest){
+
+        LoginResultDto loginResultDto = loginUserService.loginLoginUser(loginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(loginResultDto);
     }
 }
