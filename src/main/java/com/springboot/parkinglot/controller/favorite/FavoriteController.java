@@ -29,15 +29,19 @@ public class FavoriteController {
     }
 
     @GetMapping()
-    public ResponseEntity<String> getFavorite(){
+    public ResponseEntity<FavoriteDto> getFavorite(String username){
 
-        return null;
+        FavoriteDto favoriteDto = favoriteService.getFavorite(username);
+
+        return ResponseEntity.status(HttpStatus.OK).body(favoriteDto);
     }
 
     @DeleteMapping()
-    public ResponseEntity<String> deleteFavorite(){
+    public ResponseEntity<FavoriteDto> deleteFavorite(FavoriteDeleteRequest favoriteDeleteRequest){
 
-        return null;
+        FavoriteDto favoriteDto = favoriteService.deleteFavorite(favoriteDeleteRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(favoriteDto);
     }
 
 }

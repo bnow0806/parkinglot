@@ -1,5 +1,6 @@
 package com.springboot.parkinglot.controller.favorite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.parkinglot.controller.login.LoginUser;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class Favorite {
     private LoginUser loginUser;
 
     //역방향
+    @JsonIgnore
     @OneToMany(mappedBy = "favorite", fetch=FetchType.LAZY)    //lazy
     private List<FavoriteCharger> favoriteCharger;
 
