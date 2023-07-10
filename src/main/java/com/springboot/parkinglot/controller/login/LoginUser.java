@@ -1,5 +1,6 @@
 package com.springboot.parkinglot.controller.login;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.parkinglot.controller.favorite.Favorite;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,6 +35,7 @@ public class LoginUser {
     @Column(nullable = false)
     private String role;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "favorite_id")
     private Favorite favorite;

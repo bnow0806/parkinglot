@@ -1,5 +1,6 @@
 package com.springboot.parkinglot.controller.favorite;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.parkinglot.controller.charger.Charger;
 import lombok.*;
 
@@ -17,11 +18,13 @@ public class FavoriteCharger {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @ToString.Exclude                   //java.lang.StackOverflowError
     @JoinColumn(name = "favorite_id")   //FK를 가짐
     private Favorite favorite;
 
+    //@JsonIgnore
     @ManyToOne
     @ToString.Exclude                   //java.lang.StackOverflowError
     @JoinColumn(name = "charger_id")    //FK를 가짐
