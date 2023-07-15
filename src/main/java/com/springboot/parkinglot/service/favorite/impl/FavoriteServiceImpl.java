@@ -150,7 +150,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         //1. username, chargername을 받음 -> 각각 id 로 변환
         //   username(user) -> favorite -> favoritecharger 접근
         //2. favorite 내 List<favortiecharger>에서 charger_id가 일치하는 것을 삭제
-        //3. favoritecharger 중에서 charger_id가 일치하는 것을 모두 삭제, 저장
+        //   + favoritecharger 중에서 charger_id가 일치하는 것을 모두 삭제
 
         //Step1
         String username = favoriteDeleteRequest.getUsername();
@@ -173,42 +173,30 @@ public class FavoriteServiceImpl implements FavoriteService {
 
         System.out.println("Before favorite.getFavoriteCharger()\n"+favoriteChargerFromFavorite);
 
-        //Iterator를 이용해 List 내 요소 제거
+        //Iterator를 이용해 List 내 요소 삭제 + favoritecharger 삭제
         Iterator<FavoriteCharger> iterator = favoriteChargerFromFavorite.iterator();
         while (iterator.hasNext()) {
             FavoriteCharger favoriteChargerTemp = iterator.next();
             if (chargerNumber.equals(favoriteChargerTemp.getCharger().getNumber())) {
                 iterator.remove();
+
+                //favoritecharger 삭제
+                FavoriteCharger findFavoriteCharger = favoriteChargerRepository.findById(favoriteChargerTemp.getId()).get();
+                findFavoriteCharger.setFavorite(null);
+                findFavoriteCharger.setCharger(null);
+                favoriteChargerRepository.delete(findFavoriteCharger);
             }
         }
 
-        //System.out.println("Removed favoriteChargerFromFavorite\n"+favoriteChargerFromFavorite);
-
-        favorite.setFavoriteCharger(favoriteChargerFromFavorite);   //덮어쓰기?
+        favorite.setFavoriteCharger(favoriteChargerFromFavorite);   //덮어쓰기
         Favorite updatedfavorite = favoriteRepository.save(favorite);  //삭제 후 저장
 
-        //저장이 되지 않고, 재실행 시 Before favorite.getFavoriteCharger()가 동일하게 표현됨   //해결 필요
-        System.out.println("Updated favorite.getFavoriteCharger()\n"+favorite.getFavoriteCharger());
+        System.out.println("Updated favorite.getFavoriteCharger()\n"+updatedfavorite.getFavoriteCharger());
 
-
-        //Step3 //Step3를 실시하면 Step2는 저절로 실시됨
-        List<FavoriteCharger> favoriteChargerFromCharger = favoriteChargerRepository.findByCharger_Number(chargerNumber);
-
-        //기존 내용 출력
-        for(FavoriteCharger favoriteChargerTemp : favoriteChargerFromCharger){
-            System.out.println("Before deleteFavoriteCharger");
-            System.out.println("favoriteChargerId : "+favoriteChargerTemp.getId()+" ("
-                    +favoriteChargerTemp.getFavorite().getId()+","
-                    + favoriteChargerTemp.getCharger().getNumber()+")\n");
-            //delete    //Step3를 실시하면 Step2는 저절로 실시됨
-            //favoriteChargerRepository.delete(favoriteChargerTemp);
-        }
-
-        //return null;
         return FavoriteDto.builder()
-               .favoriteId(favorite.getId())
+               .favoriteId(updatedfavorite.getId())
                 .loginUser(loginUser)
-                .favoriteCharger(favorite.getFavoriteCharger())
+                .favoriteCharger(updatedfavorite.getFavoriteCharger())
                 .build();
     }
 }
