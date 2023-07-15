@@ -26,7 +26,7 @@ public class Favorite {
 
     //역방향
     @JsonIgnore
-    @OneToMany(mappedBy = "favorite", fetch=FetchType.LAZY)    //lazy
+    @OneToMany(mappedBy = "favorite", fetch=FetchType.LAZY, orphanRemoval = true)    //lazy //orhanRemoval 추가
     private List<FavoriteCharger> favoriteCharger;
 
     public Favorite() {             //생성자 강제로 만들기

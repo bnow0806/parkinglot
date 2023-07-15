@@ -188,7 +188,7 @@ public class FavoriteServiceImpl implements FavoriteService {
         Favorite updatedfavorite = favoriteRepository.save(favorite);  //삭제 후 저장
 
         //저장이 되지 않고, 재실행 시 Before favorite.getFavoriteCharger()가 동일하게 표현됨   //해결 필요
-        System.out.println("Updated favorite.getFavoriteCharger()\n"+favorite.getFavoriteCharger());
+        System.out.println("Updated favorite.getFavoriteCharger()\n"+updatedfavorite.getFavoriteCharger());
 
 
         //Step3 //Step3를 실시하면 Step2는 저절로 실시됨
